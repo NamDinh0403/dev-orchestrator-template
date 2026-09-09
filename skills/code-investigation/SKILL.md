@@ -34,4 +34,5 @@ areas confirmed unaffected.
 - Do not repeatedly read unchanged files.
 - Prefer concise evidence summaries over large raw output.
 - Distinguish evidence from assumptions; never present an assumption as evidence.
-- Current source overrides stored memory on conflict — record the conflict.
+- Current source overrides stored memory on conflict — record the conflict. Full retrieval
+  budget and validation checklist: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.

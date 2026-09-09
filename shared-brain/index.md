@@ -53,6 +53,7 @@ The orchestrator routes each phase to a focused skill:
 | File | Purpose |
 | ---- | ------- |
 | `investigation-approval-gate.md` | Mandatory investigation→review→implementation gate: operating modes, gate statuses, approval rules, reapproval triggers, reviewer identity, artifact layout |
+| `memory-evidence-policy.md` | Canonical memory/evidence rules: evidence precedence hierarchy, layered architecture, knowledge types + hypothesis handling, retrieval contract (budget + validation checklist), conflict handling, freshness/invalidation statuses |
 
 ## Improvement backlog (`improvement-backlog/`)
 
@@ -69,4 +70,4 @@ finding here only when it recurs across more than one project.
 `task-min-template.md` (Fast/Standard records), `task-full-template.md` (Deep records),
 `decision-template.md`, `knowledge-template.md`, `project-profile-template.md`,
 `investigation-template.md`, `approval-template.md`, `implementation-template.md`,
-`improvement-backlog-template.md`.
+`improvement-backlog-template.md`, `memory-index-template.md`.

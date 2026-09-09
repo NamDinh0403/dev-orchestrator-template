@@ -58,6 +58,6 @@ executed commands and their results. Do not claim success without executed valid
 ## Persist result
 
 Write `.../investigations/<issue-id-or-slug>/implementation.md` from the template: precondition
-check, approved scope implemented, changes (files/symbols), verification evidence, manual
-verification, scope/risk notes, and outcome. Then perform path-sized durable capture per the
-orchestrator's Durable-capture rules.
+check, approved scope implemented, requirement-to-change mapping, changes (files/symbols),
+verification evidence, manual verification, scope/risk notes, and outcome. Then perform path-sized
+durable capture per the orchestrator's Durable-capture rules.

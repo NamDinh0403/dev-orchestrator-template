@@ -2,7 +2,8 @@
 Template — investigation.md
 Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/investigation.md
 Produced in INVESTIGATE mode by /investigate-issue. Read-only evidence: never modify source, config,
-or tests as part of a proposed fix; never implement. Replace every <placeholder>.
+or tests as part of a proposed fix; never implement. Replace every <placeholder>. Memory retrieval
+and evidence rules: ~/.copilot/shared-brain/workflows/memory-evidence-policy.md.
 -->
 
 # Investigation: <issue ID or title>
@@ -21,7 +22,7 @@ or tests as part of a proposed fix; never implement. Replace every <placeholder>
 ## Issue Summary
 
 - Original requirement:
-- Reported behavior:
+- Reported (current) behavior:
 - Expected behavior:
 - Acceptance criteria:
 - Relevant environment information:
@@ -46,7 +47,7 @@ or tests as part of a proposed fix; never implement. Replace every <placeholder>
 - Expected result:
 - Limitations:
 
-## Evidence
+## Evidence (verified facts only — no assumptions or hypotheses here)
 
 For every material finding:
 
@@ -57,6 +58,32 @@ For every material finding:
   - Line range (when available):
   - Interpretation:
   - Confidence: <High | Medium | Low>
+
+## Assumptions
+
+Explicit, load-bearing assumptions made because direct evidence was unavailable. Each must be
+re-checked before being relied upon by implementation or a later task.
+
+- A-1: <assumption> — <why it was necessary; what would confirm/refute it>
+
+## Hypotheses
+
+Possible explanations that are **not confirmed**. Never cite these as fact elsewhere; a hypothesis
+must be revalidated every time it is reused (see `memory-evidence-policy.md` §4).
+
+- H-1: <hypothesis> — <what evidence would confirm or refute it>
+
+## Relevant Memory
+
+Entries retrieved from Project Memory / Shared Brain while investigating (max 5 by default; see
+`memory-evidence-policy.md` §5). Keyword similarity alone is never proof of applicability.
+
+- **Selected:**
+  - <Entry ID> — <why relevant> — <validated against current source: yes/no + note>
+- **Rejected:**
+  - <Entry ID> — <why rejected: out of scope / stale / conflicting / unsupported>
+- **Conflicts found:**
+  - <Entry ID vs. Entry ID or vs. current evidence> — <resolution, or "unresolved — see Open Questions">
 
 ## Execution Flow
 
@@ -86,13 +113,20 @@ Verified execution path from entry point to observed outcome. Mark each step:
 - Compatibility impact:
 - Regression risk:
 
-## Proposed Solution
+## Solution Options
+
+List each viable approach considered, including the one recommended below:
+
+- Option 1: <approach> — <trade-offs / risks>
+- Option 2: <approach> — <trade-offs / risks>
+
+## Recommended Solution
 
 - Recommended change:
 - Expected files and symbols:
 - Implementation constraints:
-- Alternatives considered:
-- Risks and trade-offs:
+- Why this option over the others:
+- Risks and side effects:
 - Verification plan:
 - Rollback considerations:
 
@@ -111,6 +145,8 @@ Explicitly define what a developer would approve:
 - Files expected to change:
 - Explicit exclusions:
 - Required tests:
+- Implementation prerequisites: <access, config, approvals, or environment needed before
+  implementation can start, or "none">
 - Conditions requiring reapproval:
 
 ## Investigation Gate

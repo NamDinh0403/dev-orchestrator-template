@@ -34,6 +34,11 @@ APPROVED_FOR_IMPLEMENTATION approval. Replace every <placeholder>.
 - Approved behavior delivered:
 - Explicit exclusions respected:
 
+## Requirement-to-Change Mapping
+
+| Requirement / acceptance criterion | Change (file/symbol) |
+| ----------------------------------- | --------------------- |
+
 ## Changes
 
 - Files changed:

@@ -31,20 +31,24 @@ tags: []
 ## 3. Confirmed root cause / technical gap
 <For bugs: the verified cause. For features: the gap being filled. "n/a" if trivial.>
 
-## 4. Changes made
+## 4. Memory referenced
+<Accepted entry IDs and rejected entry IDs (one line each, or "none" — no full table required at
+this path). See `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.>
+
+## 5. Changes made
 - `<path>` — <what changed and why, traceable to the requirement>
 
-## 5. Validation
+## 6. Validation
 | Command | Result | Summary | Pre-existing failure? |
 | ------- | ------ | ------- | --------------------- |
 
 Gaps and reasons: <... or "none">
 
-## 6. Decisions
+## 7. Decisions
 - <meaningful decision + one-line outcome, or "none material">
 
-## 7. Reusable findings
+## 8. Reusable findings
 - <project-only / Shared Brain candidate / none — verified? — proposed ID>
 
-## 8. Remaining risks / manual verification
+## 9. Remaining risks / manual verification
 - [ ] <manual step a human should perform, or "none">

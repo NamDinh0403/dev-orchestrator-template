@@ -24,6 +24,7 @@ Use the section matching the decision. Never invent a reviewer identity.
 ## Approved Scope
 
 - Approved behavior:
+- Approved root cause: <restate the confirmed root cause this approval is bound to>
 - Approved technical approach:
 - Approved files or components:
 - Explicit exclusions:
@@ -48,6 +49,9 @@ Reinvestigation/reapproval is required if any occurs (at minimum):
 - Public API or integration contract change discovered.
 - Change to acceptance criteria.
 - Change to the proposed solution beyond approved constraints.
+- Architecture impact discovered that was not part of the approved scope.
+- Backward-compatibility impact discovered.
+- Change to the verification/validation strategy from what was approved.
 
 ## Decision
 

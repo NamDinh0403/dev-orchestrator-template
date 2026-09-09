@@ -105,9 +105,15 @@ evidence). A developer may **override** the path with an explicit instruction; r
 
 Index-first only. Search the project `memory-index.md` and `~/.copilot/shared-brain/index.md`;
 load only entries matching technology, framework, error, entity, integration, task type, module,
-config key, build tool, or testing tool. Rank, load the best candidates, validate each against
-current source, and record accepted/rejected with reasons. **Current source and executed
-validation override memory on conflict.** Stop loading when evidence is sufficient.
+config key, build tool, or testing tool — keyword/title similarity alone is never proof of
+applicability. Select **at most 5 entries by default**; loading more requires a stated
+justification recorded with the task. Validate each candidate against repository/component scope,
+`applies_when`/`does_not_apply_when` conditions, status, freshness, and current-source
+compatibility; record accepted/rejected with reasons. **Never silently choose between conflicting
+memory entries** — surface the conflict, resolve it with current source/evidence, and stop before
+implementation if it is unresolved and material. **Current source and executed validation override
+memory on conflict.** Full retrieval contract, evidence-precedence hierarchy, and freshness/status
+rules: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
 
 ## Capability routing
 

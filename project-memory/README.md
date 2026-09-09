@@ -28,16 +28,20 @@ identity is ambiguous, create a separate namespace rather than merging memory.
 ```
 projects/<PROJECT-KEY>/
 ├── project-profile.md      # verified repo identity, stack, commands, conventions
-├── memory-index.md         # tasks, decisions, knowledge overview
+├── memory-index.md         # tasks, decisions, knowledge overview (shared-brain/templates/memory-index-template.md)
 ├── investigations/<issue-id-or-slug>/
 │   ├── investigation.md    # INVESTIGATE-mode report + gate status
 │   ├── approval.md         # REVIEW_APPROVAL-mode developer decision
 │   └── implementation.md   # IMPLEMENT/VERIFY-mode result
 ├── tasks/{active,completed,abandoned}/<TASK-ID>.md
-├── decisions/DEC-YYYYMMDD-###.md
-├── knowledge/{architecture,patterns,known-pitfalls,troubleshooting}.md
+├── decisions/DEC-YYYYMMDD-###.md          # created lazily on the first real decision — not pre-scaffolded empty
+├── knowledge/{architecture,patterns,known-pitfalls,constraints,troubleshooting}.md  # created lazily per category on first real entry
 └── improvement-backlog.md  # project-scoped workflow-performance observations (evidence-linked)
 ```
+
+`decisions/` and `knowledge/*.md` are created on demand by `decision-capture` / `knowledge-capture`
+the first time this project has a real entry to record — `project-bootstrap` does not pre-create
+empty category files, to avoid memory scaffolding that is never populated or read.
 
 ## Improvement backlog (project-scoped)
 
@@ -69,7 +73,23 @@ to `abandoned` with a reason. Full procedure: the `task-intake` and `task-resume
 
 Before broad investigation, search this project's `memory-index.md`, completed tasks, decisions,
 and knowledge; then the Shared Brain index and relevant entries. Validate every reused finding
-against current source; record accepted/rejected with reasons.
+against current source; record accepted/rejected with reasons. Full retrieval budget (default max
+5 entries), validation checklist, and evidence-precedence hierarchy:
+`~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
+
+## Layered memory architecture
+
+1. **Session Working Memory** — the current task's in-context state; ephemeral, never durable.
+2. **Local Project Memory** (this store) — this repository's isolated findings, tasks, decisions,
+   investigation artifacts.
+3. **Team Project Knowledge** *(optional)* — reviewed, project-specific knowledge shared across a
+   team, only where the repository/org already provides a secure, private, team-shared location.
+   Not scaffolded here by default — document it as an available integration if one exists, rather
+   than creating an unused folder.
+4. **Shared Brain** — sanitized, generalized, cross-project knowledge (`~/.copilot/shared-brain/`).
+
+Full layer responsibilities and the evidence-precedence hierarchy across all four layers:
+`~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
 
 ## Resume behavior
 
@@ -80,7 +100,7 @@ similarly named task from another project.
 
 ## Knowledge promotion
 
-Project knowledge uses `ARC/PAT/PIT/TRB`. Promote to the Shared Brain (`SB-*`) only
+Project knowledge uses `ARC/PAT/PIT/CST/TRB`. Promote to the Shared Brain (`SB-*`) only
 non-client-specific, evidence-backed, reusable findings with sanitized content, explicit scope,
 and invalidation conditions. See the `knowledge-capture` skill.
 
@@ -93,5 +113,6 @@ necessary in the project task record — never in the Shared Brain.
 ## Stale-memory handling
 
 Current source and executed validation override stored memory. On conflict, record it in the
-task and correct the memory. Mark obsolete knowledge/decisions as **superseded** with a link;
-never delete history.
+task and correct the memory. Mark obsolete knowledge/decisions as **superseded**, **stale**, or
+**invalidated** (with a link where applicable); never delete history. Full status vocabulary and
+revalidation triggers: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.

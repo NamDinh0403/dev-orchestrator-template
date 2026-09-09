@@ -7,9 +7,10 @@
 
 - **ID:** DEC-YYYYMMDD-### (project-specific) or SB-DEC-### (shared principle)
 - **Title:** <short decision title>
-- **Status:** proposed | accepted | superseded | rejected
+- **Status:** proposed | accepted | invalidated | superseded | rejected
 - **Date:** YYYY-MM-DD
 - **Source task:** <TASK-ID>
+- **Scope (optional):** <repositories / components this decision applies to>
 
 ## Context
 <Situation and forces requiring a decision.>
@@ -44,6 +45,9 @@ high | medium | low
 
 ## Invalidation conditions
 <What future change or evidence would make this decision no longer valid.>
+
+## Supersedes
+<Decision ID this one replaces, or n/a.>
 
 ## Superseded-by
 <Decision ID that replaces this, or n/a. Never delete history.>

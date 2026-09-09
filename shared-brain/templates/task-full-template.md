@@ -37,8 +37,8 @@ tags: []
 - <explicitly excluded>
 
 ## 6. Memory Consulted
-| Source (project / shared) | Entry ID | Why relevant | Confirmed by current source? | Accepted/Rejected |
-| ------------------------- | -------- | ------------ | ---------------------------- | ----------------- |
+| Source (project / shared) | Entry ID | Status | Why relevant | Confirmed by current source? | Accepted/Rejected |
+| ------------------------- | -------- | ------ | ------------ | ---------------------------- | ------------------ |
 
 ## 7. Investigation
 - **Search strategy / keywords:**

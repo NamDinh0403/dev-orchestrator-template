@@ -44,11 +44,16 @@ findings history rather than silently rewriting them.
 2. Reuse the `code-investigation` skill for progressive, index-first investigation; fan out
    independent threads to the **`explore`** subagent. Do not scan the whole repository.
 3. Capture the current **source revision** and **working tree status** for the metadata block.
-4. Fill every section of the investigation template: metadata, issue summary, initial
+4. Retrieve candidate memory per `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`
+   (index-first, max 5 by default, validated against current source) and record it in the
+   template's Relevant Memory section (selected / rejected / conflicts found).
+5. Fill every section of the investigation template: metadata, issue summary, initial
    classification, reproduction, evidence (per finding: file/symbol/line range/interpretation/
-   confidence), execution flow (confirmed vs inferred vs failure point), root cause, impact
-   analysis, proposed solution, open questions (with owners), and review scope.
-5. Distinguish confirmed evidence from inference throughout.
+   confidence), assumptions, hypotheses, relevant memory, execution flow (confirmed vs inferred vs
+   failure point), root cause, impact analysis, solution options + recommended solution, open
+   questions (with owners), and review scope (including implementation prerequisites).
+6. Distinguish confirmed evidence from assumptions and hypotheses throughout — never state an
+   assumption or hypothesis as a verified fact.
 
 ## Artifact location
 

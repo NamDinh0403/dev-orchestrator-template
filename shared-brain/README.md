@@ -40,8 +40,9 @@ Do not silently delete history.
 
 ## Conflict resolution
 
-Current source code and executed validation override Shared Brain. When they conflict, trust
-the code, record the conflict in the task, and correct the entry.
+Current source code and executed validation always outrank the Shared Brain, which in turn never
+overrides verified project-specific evidence. Full evidence-precedence hierarchy and conflict
+handling: `workflows/memory-evidence-policy.md`.
 
 ## Privacy boundaries
 
@@ -52,7 +53,9 @@ here. Generalize and sanitize before promoting.
 
 - `SB-PAT-###` — cross-project patterns (`engineering/patterns.md`)
 - `SB-PIT-###` — cross-project pitfalls (`engineering/known-pitfalls.md`)
+- `SB-CST-###` — cross-project constraints (`engineering/known-pitfalls.md`, category: constraint)
 - `SB-TRB-###` — cross-project troubleshooting (`engineering/troubleshooting.md`)
 - `SB-DEC-###` — decision principles (`engineering/decision-principles.md`)
 
-Index: `index.md`.
+Index: `index.md`. Knowledge types, statuses, and required fields for every entry:
+`shared-brain/templates/knowledge-template.md`.

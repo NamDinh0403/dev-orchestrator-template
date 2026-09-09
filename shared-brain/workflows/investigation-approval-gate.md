@@ -102,6 +102,9 @@ An existing approval becomes stale and requires reinvestigation/reapproval when 
 - Public API or integration contract change discovered.
 - Change to acceptance criteria.
 - Change to the proposed solution beyond approved constraints.
+- Architecture impact discovered that was not part of the approved scope.
+- Backward-compatibility impact discovered.
+- Change to the verification/validation strategy from what was approved.
 
 ## Implementation preconditions (IMPLEMENT)
 

@@ -19,7 +19,9 @@ task (use `task-intake`). **Never** resume a similarly named task from another p
 4. Compare repository state with the saved task state; classify each plan step as **completed,
    pending, stale, or invalidated**.
 5. Preserve previous decisions; mark invalidated ones (do not delete). Re-validate evidence for
-   files that changed since it was recorded — changed source invalidates old investigation evidence.
+   files that changed since it was recorded — changed source invalidates old investigation
+   evidence. Revalidation triggers and freshness statuses:
+   `~/.copilot/shared-brain/workflows/memory-evidence-policy.md` §7.
 6. Continue from the correct phase without repeating valid completed work; re-run validation
    affected by source changes; keep the task active until completion requirements are met.
 

@@ -40,8 +40,9 @@ If material source changes invalidate the investigation, **do not approve** — 
 `NEEDS_REINVESTIGATION`, explain why, and recommend `/investigate-issue <path>`.
 
 Otherwise create or replace `approval.md` (approve section of the template) with: metadata
-(including investigated + approved source revisions and approval version), approved scope, approval
-conditions, reapproval triggers, and `Decision: APPROVED_FOR_IMPLEMENTATION`.
+(including investigated + approved source revisions and approval version), approved scope
+(including an explicit restatement of the approved root cause — not just a version reference),
+approval conditions, reapproval triggers, and `Decision: APPROVED_FOR_IMPLEMENTATION`.
 
 ## REQUEST_CHANGES procedure
 
