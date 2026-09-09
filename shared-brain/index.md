@@ -70,4 +70,5 @@ finding here only when it recurs across more than one project.
 `task-min-template.md` (Fast/Standard records), `task-full-template.md` (Deep records),
 `decision-template.md`, `knowledge-template.md`, `project-profile-template.md`,
 `investigation-template.md`, `approval-template.md`, `implementation-template.md`,
-`improvement-backlog-template.md`, `memory-index-template.md`.
+`improvement-backlog-template.md`, `memory-index-template.md` (thin router),
+`component-index-template.md`, `decision-index-template.md`, `task-index-template.md`.

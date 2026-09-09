@@ -54,12 +54,17 @@ Recommend `/investigate-issue <investigation-report-path>`.
 ## REJECT procedure
 
 Create or update `approval.md` with `Decision: REJECTED`, rejection reason, review timestamp, and
-reviewer. Update the investigation gate to `REJECTED`. No implementation may proceed.
+reviewer. Update the investigation gate to `REJECTED`. No implementation may proceed. `REJECTED` is
+a terminal gate status — move the whole investigation folder from `investigations/active/` to
+`investigations/completed/` (never split `investigation.md`/`approval.md` apart).
 
 ## Artifact location
 
-`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/approval.md`
-(same directory as the investigation).
+`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/active/<issue-id-or-slug>/approval.md`
+(same directory as the investigation, while the gate is non-terminal — `APPROVE` and
+`REQUEST_CHANGES` both leave the folder under `active/`, since neither
+`APPROVED_FOR_IMPLEMENTATION` nor `NEEDS_REINVESTIGATION` is a terminal status). Only `REJECT`
+moves the folder to `investigations/completed/` at this stage.
 
 ## Rules
 

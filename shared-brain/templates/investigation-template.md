@@ -1,6 +1,6 @@
 <!--
 Template — investigation.md
-Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/investigation.md
+Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/investigation.md
 Produced in INVESTIGATE mode by /investigate-issue. Read-only evidence: never modify source, config,
 or tests as part of a proposed fix; never implement. Replace every <placeholder>. Memory retrieval
 and evidence rules: ~/.copilot/shared-brain/workflows/memory-evidence-policy.md.
@@ -76,7 +76,7 @@ must be revalidated every time it is reused (see `memory-evidence-policy.md` §4
 ## Relevant Memory
 
 Entries retrieved from Project Memory / Shared Brain while investigating (max 5 by default; see
-`memory-evidence-policy.md` §5). Keyword similarity alone is never proof of applicability.
+`memory-evidence-policy.md` §6). Keyword similarity alone is never proof of applicability.
 
 - **Selected:**
   - <Entry ID> — <why relevant> — <validated against current source: yes/no + note>

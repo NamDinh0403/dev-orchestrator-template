@@ -10,8 +10,10 @@ light version; Standard/Deep invoke this skill fully.
 
 ## Order
 1. Parse the request; extract keywords and symbols.
-2. Resolve the current project; load its `memory-index.md`.
-3. Search relevant current-project knowledge, then relevant Shared Brain entries (index-first).
+2. Resolve the current project; load its `index/memory-index.md`, which routes to
+   `index/component-index.md` for matching knowledge/pitfall files.
+3. Search relevant current-project knowledge (the 1–5 files `component-index.md` points to), then
+   relevant Shared Brain entries (index-first).
 4. Inspect repository manifests (package/build/solution files) to confirm stack and commands.
 5. Locate direct implementation entry points.
 6. Search exact symbols; read only directly relevant files.

@@ -55,9 +55,10 @@ Declare the **active mode** before performing mode-specific work:
 - **COMPLETE** — persist `implementation.md` and path-sized durable capture.
 
 Persistent artifacts (preserve the established Project Memory root):
-`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/`
-containing `investigation.md`, `approval.md`, `implementation.md`. Never store these in the Shared
-Brain. Full policy: `~/.copilot/shared-brain/workflows/investigation-approval-gate.md`.
+`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/`
+containing `investigation.md`, `approval.md`, `implementation.md` — the folder moves from `active/`
+to `completed/` once the gate reaches a terminal status. Never store these in the Shared Brain.
+Full policy: `~/.copilot/shared-brain/workflows/investigation-approval-gate.md`.
 
 ## Intake
 
@@ -103,7 +104,8 @@ evidence). A developer may **override** the path with an explicit instruction; r
 
 ## Memory strategy
 
-Index-first only. Search the project `memory-index.md` and `~/.copilot/shared-brain/index.md`;
+Index-first only. Search the project `index/memory-index.md` (which routes to
+`component-index.md`/`decision-index.md`/`task-index.md`) and `~/.copilot/shared-brain/index.md`;
 load only entries matching technology, framework, error, entity, integration, task type, module,
 config key, build tool, or testing tool — keyword/title similarity alone is never proof of
 applicability. Select **at most 5 entries by default**; loading more requires a stated

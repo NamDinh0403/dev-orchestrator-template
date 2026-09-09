@@ -63,11 +63,27 @@ must never be cited as an established fact in a later task. It lives only inside
 only become durable knowledge once confirmed by evidence (source, runtime, or test) — see
 `shared-brain/templates/knowledge-template.md` for the full schema.
 
-## 5. Retrieval contract
+## 5. Storage granularity (bounded, purpose-specific files)
+
+Durable knowledge/pitfall entries live **one per file** by default (a small cluster captured
+together in the same verification pass about the same narrow topic may share one file); category
+folders (`knowledge/<category>/`, `pitfalls/<category>/`) are created lazily, only on the first real
+entry in that category. This avoids both a handful of large files each holding many unrelated
+entries, and a proliferation of pre-scaffolded empty files nobody populates. Investigations move
+from `investigations/active/` to `investigations/completed/` once their gate reaches a terminal
+status; tasks move from `completed/`/`abandoned/` to `archived/` once no longer likely to be
+referenced; superseded/invalidated decisions move from `decisions/active/` to
+`decisions/superseded/`. Retired whole files from earlier conventions go to `archive/` with a dated
+provenance note — never deleted. Full namespace layout: `project-memory/README.md`.
+
+## 6. Retrieval contract
 
 1. Identify the repository and resolve the Project Memory location (`task-intake`).
-2. Read only: the project profile summary, `memory-index.md`, matching component/knowledge files,
-   and the Shared Brain `index.md` — never a complete store.
+2. Read only `index/memory-index.md` first — it is a thin router, never a store. It points to
+   `project-profile.md`, and to exactly the sub-index needed:
+   `index/component-index.md` (knowledge/pitfalls by component, integration, configuration, or
+   operations area), `index/decision-index.md`, or `index/task-index.md`. Never read a whole
+   `knowledge/`, `pitfalls/`, `decisions/`, or `tasks/` tree by default.
 3. Generate retrieval criteria from: the requirement, repository, affected component, error or
    symptom, technology, relevant file paths, and known constraints.
 4. Select **at most 5 entries by default**. Loading more requires a stated justification recorded
@@ -87,13 +103,13 @@ only become durable knowledge once confirmed by evidence (source, runtime, or te
 7. Record accepted and rejected entries with a one-line reason each — in `investigation.md`'s
    Relevant Memory section, or the task record's Memory Consulted / Memory referenced field.
 
-## 6. Conflict handling
+## 7. Conflict handling
 
 Never silently choose between conflicting memory entries. Surface the conflict explicitly and
 resolve it using the evidence-precedence hierarchy (§2). If it cannot be resolved and materially
 affects the solution, record it as an open uncertainty and **stop before implementation**.
 
-## 7. Freshness and invalidation
+## 8. Freshness and invalidation
 
 Status vocabulary: `candidate → verified → (stale | invalidated | superseded)`.
 
@@ -118,7 +134,7 @@ Revalidation triggers (checked opportunistically during `task-resume`, `code-inv
 Never delete historical knowledge — mark it appropriately and preserve traceability via
 `supersedes` / `superseded_by`.
 
-## 8. Promotion to Shared Brain
+## 9. Promotion to Shared Brain
 
 Unchanged gate (enforced by `knowledge-capture`): not client-specific; applicable beyond one
 project; backed by direct evidence or executable validation; sanitized; explicit scope with

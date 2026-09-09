@@ -14,7 +14,7 @@ Result template: `~/.copilot/shared-brain/templates/implementation-template.md`.
 
 ### Approved-investigation path (preferred)
 
-Input is `.../investigations/<issue-id-or-slug>/investigation.md` (or the issue id/slug).
+Input is `.../investigations/active/<issue-id-or-slug>/investigation.md` (or the issue id/slug).
 
 ### Raw-card path (no prior investigation)
 
@@ -57,7 +57,9 @@ executed commands and their results. Do not claim success without executed valid
 
 ## Persist result
 
-Write `.../investigations/<issue-id-or-slug>/implementation.md` from the template: precondition
-check, approved scope implemented, requirement-to-change mapping, changes (files/symbols),
-verification evidence, manual verification, scope/risk notes, and outcome. Then perform path-sized
-durable capture per the orchestrator's Durable-capture rules.
+Write `.../investigations/active/<issue-id-or-slug>/implementation.md` from the template:
+precondition check, approved scope implemented, requirement-to-change mapping, changes
+(files/symbols), verification evidence, manual verification, scope/risk notes, and outcome. When
+`Implementation status: COMPLETE`, move the whole investigation folder (all three files) from
+`investigations/active/` to `investigations/completed/` — `BLOCKED`/`PARTIAL` stay under `active/`.
+Then perform path-sized durable capture per the orchestrator's Durable-capture rules.

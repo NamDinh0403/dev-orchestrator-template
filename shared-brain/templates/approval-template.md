@@ -1,6 +1,6 @@
 <!--
 Template — approval.md
-Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/approval.md
+Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/approval.md
 Produced in REVIEW_APPROVAL mode by /review-investigation. Never modifies application source code.
 Use the section matching the decision. Never invent a reviewer identity.
 -->

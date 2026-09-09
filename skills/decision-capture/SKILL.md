@@ -17,10 +17,10 @@ migration or rollback strategy.
 
 ## Where it lives
 - **Standard:** inline in the task record ("Decisions" section), one line + rationale.
-- **Deep:** standalone `~/.copilot/project-memory/projects/<KEY>/decisions/DEC-YYYYMMDD-###.md`
-  using `shared-brain/templates/decision-template.md`, referenced from the task and `memory-index.md`.
-  Create the `decisions/` folder the first time this project has a real standalone decision to
-  record — do not rely on it being pre-scaffolded empty.
+- **Deep:** standalone `~/.copilot/project-memory/projects/<KEY>/decisions/active/DEC-YYYYMMDD-###.md`
+  using `shared-brain/templates/decision-template.md`, referenced from the task and
+  `index/decision-index.md`. Create the `decisions/active/` folder the first time this project has
+  a real standalone decision to record — do not rely on it being pre-scaffolded empty.
 
 ## Contents (per `decision-template.md`)
 Context; evidence; options considered; selected option; rejected options; concise rationale;
@@ -31,4 +31,6 @@ optional scope (repositories/components); supersession status (`proposed | accep
 ## Discipline
 Do not overwrite history — mark obsolete decisions as **superseded** (replaced by a new decision)
 or **invalidated** (no longer valid, not yet replaced), with a link to the replacement where one
-exists. This is an engineering decision record, not a chain-of-thought log.
+exists. When a decision becomes `superseded` or `rejected`, move its file from `decisions/active/`
+to `decisions/superseded/` and update its row in `index/decision-index.md` — never delete the file
+or the row. This is an engineering decision record, not a chain-of-thought log.

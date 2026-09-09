@@ -13,15 +13,17 @@ task (use `task-intake`). **Never** resume a similarly named task from another p
 
 ## Procedure
 1. Resolve the current project identity (project key, registry, sanitized remote, local root).
-2. Load only the current project's active task file for the given task ID. If absent, check
-   `completed/` and `abandoned/`; do not fabricate a record.
+2. Look up the task in `index/task-index.md` first — it names the exact file and bucket
+   (`active`/`completed`/`abandoned`/`archived`) without opening the whole `tasks/` tree. Load only
+   that one task file. If the index doesn't have it, check `tasks/active/` directly; do not
+   fabricate a record.
 3. Check the current branch, Git HEAD, working-tree status, and diff.
 4. Compare repository state with the saved task state; classify each plan step as **completed,
    pending, stale, or invalidated**.
 5. Preserve previous decisions; mark invalidated ones (do not delete). Re-validate evidence for
    files that changed since it was recorded — changed source invalidates old investigation
    evidence. Revalidation triggers and freshness statuses:
-   `~/.copilot/shared-brain/workflows/memory-evidence-policy.md` §7.
+   `~/.copilot/shared-brain/workflows/memory-evidence-policy.md` §8.
 6. Continue from the correct phase without repeating valid completed work; re-run validation
    affected by source changes; keep the task active until completion requirements are met.
 
@@ -29,5 +31,6 @@ task (use `task-intake`). **Never** resume a similarly named task from another p
 An updated, reconciled active task record and a continuation from the correct phase.
 
 ## Memory
-- Reads: project `tasks/active/<TASK-ID>.md`, Git state.
-- Writes: reconciled task record (state, invalidated evidence/decisions marked).
+- Reads: project `index/task-index.md`, the one task file it points to, Git state.
+- Writes: reconciled task record (state, invalidated evidence/decisions marked); update the task's
+  row in `index/task-index.md` if its bucket changed.

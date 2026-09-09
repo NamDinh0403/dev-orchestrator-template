@@ -15,9 +15,14 @@ the correct layer.
   scaffold, validation gap) → that project's own `improvement-backlog.md`. Escalate to
   `shared-brain/improvement-backlog/backlog.md` only if the same problem recurs across more than
   one project.
-- **Project Memory knowledge** → `project-memory/projects/<KEY>/knowledge/` (ARC/PAT/PIT/CST/TRB).
-  Create the specific category file **lazily**, only when there is a real entry to write — do not
-  pre-create empty knowledge files.
+- **Project Memory knowledge** → `project-memory/projects/<KEY>/knowledge/<category>/<slug>.md`
+  (categories: architecture, components, integrations, configuration, operations) for
+  ARC/PAT/CST/TRB-type findings, or `pitfalls/<category>/<slug>.md` (categories: components,
+  integrations, operations) for PIT-type findings. One file per entry by default (a small cluster
+  captured in the same verification pass about the same narrow topic may share one file). Create
+  the specific category **folder** lazily, only when there is a real entry to write — do not
+  pre-create empty category folders. After writing the file, add or update its row in
+  `index/component-index.md`.
 - **Shared Brain candidate** → `shared-brain/engineering/` (SB-PAT/SB-PIT/SB-CST/SB-TRB/SB-DEC).
 - **Decision** → `decision-capture` skill.
 - **Stale knowledge correction** → mark the old entry `stale` or `invalidated`; add the correction.
@@ -53,7 +58,8 @@ logic, took a wrong path worth preserving, or requires rollback evidence. Otherw
 completed record minimal.
 
 ## Discipline
-Append/update surgically; search the relevant index first to avoid duplicates; update
-`shared-brain/index.md` or the project `memory-index.md`; current source and executed validation
-override stored knowledge on conflict. Retrieval budget, validation checklist, and status
-vocabulary: `shared-brain/workflows/memory-evidence-policy.md`.
+Append/update surgically — one entry per file, never merged into a shared multi-entry file; search
+the relevant index first to avoid duplicates; update `shared-brain/index.md` or the project's
+`index/component-index.md` (and `index/decision-index.md` for decisions); current source and
+executed validation override stored knowledge on conflict. Retrieval budget, validation checklist,
+and status vocabulary: `shared-brain/workflows/memory-evidence-policy.md`.

@@ -2,7 +2,7 @@
 name: review-investigation
 description: Record a developer's APPROVE, REQUEST_CHANGES, or REJECT decision on an investigation report and write a persistent approval decision. Never modifies application source code.
 argument-hint: <path-to-investigation.md> <APPROVE|REQUEST_CHANGES|REJECT> [comments] [scope-restrictions] [conditions]
-agent: development-orchestrator
+agent: Development Orchestrator
 ---
 
 # /review-investigation

@@ -27,21 +27,40 @@ identity is ambiguous, create a separate namespace rather than merging memory.
 
 ```
 projects/<PROJECT-KEY>/
-├── project-profile.md      # verified repo identity, stack, commands, conventions
-├── memory-index.md         # tasks, decisions, knowledge overview (shared-brain/templates/memory-index-template.md)
-├── investigations/<issue-id-or-slug>/
+├── project-profile.md      # sole source of verified repo identity, stack, commands, conventions
+├── improvement-backlog.md  # project-scoped workflow-performance observations (evidence-linked)
+├── index/                  # always created; the ONLY files read by default at task start
+│   ├── memory-index.md         # thin router — links out, never accumulates rows itself
+│   ├── component-index.md      # component/integration/config/ops area → knowledge/pitfall files
+│   ├── decision-index.md       # decision ID → title/status/scope/file
+│   └── task-index.md           # task ID → title/status/module/file (active/completed/abandoned/archived)
+├── knowledge/{architecture,components,integrations,configuration,operations}/<slug>.md
+│                          # one file per finding (or a tightly-coupled cluster from one verification pass)
+├── pitfalls/{components,integrations,operations}/<slug>.md
+├── decisions/{active,superseded}/DEC-YYYYMMDD-###.md
+├── tasks/{active,completed,abandoned,archived}/<TASK-ID>.md
+├── investigations/{active,completed}/<issue-id-or-slug>/
 │   ├── investigation.md    # INVESTIGATE-mode report + gate status
 │   ├── approval.md         # REVIEW_APPROVAL-mode developer decision
 │   └── implementation.md   # IMPLEMENT/VERIFY-mode result
-├── tasks/{active,completed,abandoned}/<TASK-ID>.md
-├── decisions/DEC-YYYYMMDD-###.md          # created lazily on the first real decision — not pre-scaffolded empty
-├── knowledge/{architecture,patterns,known-pitfalls,constraints,troubleshooting}.md  # created lazily per category on first real entry
-└── improvement-backlog.md  # project-scoped workflow-performance observations (evidence-linked)
+└── archive/                 # retired whole files from earlier conventions — dated + provenance note
 ```
 
-`decisions/` and `knowledge/*.md` are created on demand by `decision-capture` / `knowledge-capture`
-the first time this project has a real entry to record — `project-bootstrap` does not pre-create
-empty category files, to avoid memory scaffolding that is never populated or read.
+Only `project-profile.md`, `improvement-backlog.md`, and `index/` are created at bootstrap time.
+Every other folder — `knowledge/<category>/`, `pitfalls/<category>/`, `decisions/{active,superseded}/`,
+`investigations/{active,completed}/`, and `archive/` — is created **lazily**, one category-folder at
+a time, the first time this project has a real entry to write there. This avoids the two failure
+modes this structure is designed to prevent: a handful of large files each holding many unrelated
+entries, and dozens of pre-scaffolded empty files/folders nobody ever populates.
+
+**Splitting rule:** default to one file per knowledge/pitfall entry; only a small cluster of facts
+captured together in the *same* verification pass about the *same* narrow topic may share one
+file. **Retrieval rule:** `index/memory-index.md` is read first and only routes — it never itself
+grows into a large multi-entry file; the sub-index it points to then points to the 1–5 specific
+entry files actually needed. Investigations move from `investigations/active/` to
+`investigations/completed/` once their gate reaches a terminal status (implemented, rejected, or
+not-reproducible); tasks move from `completed/`/`abandoned/` to `archived/` once no longer likely
+to be referenced. Full rules: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
 
 ## Improvement backlog (project-scoped)
 
@@ -71,11 +90,11 @@ to `abandoned` with a reason. Full procedure: the `task-intake` and `task-resume
 
 ## Memory lookup
 
-Before broad investigation, search this project's `memory-index.md`, completed tasks, decisions,
-and knowledge; then the Shared Brain index and relevant entries. Validate every reused finding
-against current source; record accepted/rejected with reasons. Full retrieval budget (default max
-5 entries), validation checklist, and evidence-precedence hierarchy:
-`~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
+Before broad investigation, search this project's `index/memory-index.md` (which routes to
+`component-index.md`, `decision-index.md`, and `task-index.md`); then the Shared Brain index and
+relevant entries. Validate every reused finding against current source; record accepted/rejected
+with reasons. Full retrieval budget (default max 5 entries), validation checklist, and
+evidence-precedence hierarchy: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
 
 ## Layered memory architecture
 

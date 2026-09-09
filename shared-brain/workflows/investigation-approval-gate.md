@@ -44,11 +44,19 @@ INVESTIGATE may **not** advance to IMPLEMENT. Only a developer, via REVIEW_APPRO
 Preserve the established Project Memory root. Store the gate artifacts under:
 
 ```
-~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/
+~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/
 ├── investigation.md
 ├── approval.md
 └── implementation.md
 ```
+
+An issue's folder lives under `investigations/active/` while its gate status is not yet terminal,
+and moves to `investigations/completed/` (same folder, moved as a whole — never split apart) once
+it reaches a terminal status: `implementation.md` exists with `Implementation status: COMPLETE`,
+or the gate reached `REJECTED` or `NOT_REPRODUCIBLE`. `NEEDS_REINVESTIGATION` and
+`PENDING_DEVELOPER_REVIEW` are **not** terminal — the folder stays under `active/`. This keeps
+`task-resume` and `code-investigation` from having to open every investigation folder to learn
+which ones are still open.
 
 Never store project-specific investigations, approvals, or implementation results in the Shared
 Brain.

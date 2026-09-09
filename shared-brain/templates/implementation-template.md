@@ -1,6 +1,6 @@
 <!--
 Template — implementation.md
-Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/implementation.md
+Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/implementation.md
 Produced in IMPLEMENT → VERIFY → COMPLETE by /implement-card, only after a valid
 APPROVED_FOR_IMPLEMENTATION approval. Replace every <placeholder>.
 -->

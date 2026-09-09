@@ -17,7 +17,10 @@ Declare **INVESTIGATE** before doing mode-specific work.
 
 A card/issue URL or ID, pasted requirements, or a path to an existing `investigation.md` to revise
 (e.g. after `NEEDS_REINVESTIGATION`). When revising, increment the report version and preserve prior
-findings history rather than silently rewriting them.
+findings history rather than silently rewriting them. If the existing report lives under
+`investigations/completed/` (a prior `REJECTED` or `NOT_REPRODUCIBLE` being reopened), move the
+folder back to `investigations/active/` first — it is no longer terminal once reinvestigation
+starts.
 
 ## Allowed actions
 
@@ -57,14 +60,16 @@ findings history rather than silently rewriting them.
 
 ## Artifact location
 
-`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/<issue-id-or-slug>/investigation.md`
+`~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/active/<issue-id-or-slug>/investigation.md`
 (preserve the established Project Memory root; create the directory if missing).
 
 ## Investigation gate
 
 Set exactly one status: `PENDING_DEVELOPER_REVIEW`, `BLOCKED_MISSING_INFORMATION`, `INCONCLUSIVE`,
 or `NOT_REPRODUCIBLE`. Even a **confirmed** root cause yields `PENDING_DEVELOPER_REVIEW`, never an
-approval.
+approval. `NOT_REPRODUCIBLE` is a terminal status — move the investigation folder from
+`investigations/active/` to `investigations/completed/` when setting it. The other three statuses
+are non-terminal; the folder stays under `active/`.
 
 ## Closing response
 

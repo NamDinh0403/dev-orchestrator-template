@@ -42,7 +42,7 @@ A normalized requirement set + resolved project key, written into the task recor
 (`task-min-template.md` for Fast/Standard, `task-full-template.md` for Deep).
 
 ## Memory
-- Reads: `registry.md`, project `memory-index.md`. Retrieval budget (default max 5) and
+- Reads: `registry.md`, project `index/memory-index.md`. Retrieval budget (default max 5) and
   validation checklist: `~/.copilot/shared-brain/workflows/memory-evidence-policy.md`.
 - Writes: active task header/requirements section.
 
