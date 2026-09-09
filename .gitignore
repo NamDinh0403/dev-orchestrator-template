@@ -1,0 +1,9 @@
+# Real per-project memory is local to each teammate's machine — never share client data
+# through this template repo.
+project-memory/projects/**
+!project-memory/projects/.gitkeep
+
+# OS / editor junk
+Thumbs.db
+.DS_Store
+*.swp
