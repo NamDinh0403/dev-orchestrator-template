@@ -67,10 +67,16 @@ Everything the orchestrator needs lives under `~/.copilot/` (this VS Code Copilo
 
 1. Clone this repo.
 2. Run `install.ps1` (PowerShell). If your machine's execution policy blocks local scripts, run
-   `powershell -ExecutionPolicy Bypass -File .\install.ps1` instead. It copies `agents/`,
-   `skills/`, `prompts/` into your
-   `~/.copilot/`, and creates `~/.copilot/project-memory/` and `~/.copilot/shared-brain/` **only
-   if you don't already have them**. It never overwrites files you already have.
+   `powershell -ExecutionPolicy Bypass -File .\install.ps1` instead. Rerun it after pulling
+   template updates: it replaces existing template-managed files under `agents/`, `skills/`,
+   `prompts/`, `shared-brain/workflows/`, and `shared-brain/templates/` by default. Changed files
+   are backed up under `~/.copilot/template-backups/` before replacement (`-Force` remains
+   accepted for compatibility but is no longer needed). It preserves unrelated custom agents,
+   skills, prompts, Shared Brain knowledge/index/backlog, and all existing Project Memory.
+   It removes obsolete skills merged into `investigate-issue` and `implement-card` only if
+   their files exactly match a previously shipped template version; otherwise it warns so you
+   can review customized versions manually. First-time installation creates the starter memory
+   scaffolds.
 3. Restart/reload your Copilot agent session so it picks up the new agent and skills.
 4. On your first task in a new repository, the orchestrator will invoke `project-bootstrap` to
    register that repository in your local `project-memory/registry.md`.
