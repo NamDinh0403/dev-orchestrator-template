@@ -7,7 +7,8 @@ agent: Development Orchestrator
 
 # /review-investigation
 
-Run the **REVIEW_APPROVAL** mode of the investigation approval gate.
+Run the **REVIEW_APPROVAL** mode of the investigation approval gate — only reached when
+`/investigate-issue` was actually run (Deep, or an explicitly gated Fast/Standard task).
 
 Declare REVIEW_APPROVAL mode, then follow the `review-investigation` skill
 (`~/.copilot/skills/review-investigation/SKILL.md`) and the policy

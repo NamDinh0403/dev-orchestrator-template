@@ -23,7 +23,8 @@ simple task into an interview.
 5. **Stop** as soon as the design is implementable — do not seek exhaustive certainty.
 
 ## Output
-A concise **requirement decision record** feeding `implementation-planning`: resolved decisions
+A concise **requirement decision record** feeding the planning step of `implement-card`: resolved
+decisions
 (with rationale + evidence), deferred items, and explicit out-of-scope branches.
 
 ## Memory

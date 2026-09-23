@@ -36,13 +36,9 @@ The orchestrator routes each phase to a focused skill:
 | ------- | ----- |
 | intake → completion | `task-intake` |
 | resume an interrupted task | `task-resume` |
-| INVESTIGATE mode — read-only report (`/investigate-issue`) | `investigate-issue` |
-| progressive investigation | `code-investigation` |
-| REVIEW_APPROVAL mode — approval decision (`/review-investigation`) | `review-investigation` |
-| IMPLEMENT/VERIFY mode — gated implementation (`/implement-card`) | `implement-card` |
-| impact analysis + tiered plan | `implementation-planning` |
-| validation ordering | `targeted-validation` |
-| diff review | `diff-review` |
+| INVESTIGATE mode — read-only, index-first, progressive investigation (`/investigate-issue`); Deep or explicit request only | `investigate-issue` |
+| REVIEW_APPROVAL mode — approval decision (`/review-investigation`); Deep or explicit request only | `review-investigation` |
+| plan (tiered) → IMPLEMENT → VERIFY, incl. validation ordering + diff review; direct on Fast/Standard, gated on Deep (`/implement-card`) | `implement-card` |
 | classification and promotion | `knowledge-capture` |
 | decision records | `decision-capture` |
 | first-time project setup | `project-bootstrap` |
@@ -52,8 +48,8 @@ The orchestrator routes each phase to a focused skill:
 
 | File | Purpose |
 | ---- | ------- |
-| `investigation-approval-gate.md` | Mandatory investigation→review→implementation gate: operating modes, gate statuses, approval rules, reapproval triggers, reviewer identity, artifact layout |
-| `memory-evidence-policy.md` | Canonical memory/evidence rules: evidence precedence hierarchy, layered architecture, knowledge types + hypothesis handling, retrieval contract (budget + validation checklist), conflict handling, freshness/invalidation statuses |
+| `investigation-approval-gate.md` | Risk-scoped investigation→review→implementation gate (Deep, or explicit request only): operating modes, gate statuses, approval rules, reapproval triggers, reviewer identity, artifact layout |
+| `memory-evidence-policy.md` | Canonical memory/evidence rules: evidence precedence hierarchy, layered architecture, knowledge types + hypothesis handling, retrieval contract (budget + validation checklist), conflict handling, freshness/invalidation statuses, report size discipline (§10) |
 
 ## Improvement backlog (`improvement-backlog/`)
 

@@ -121,7 +121,7 @@ Status vocabulary: `candidate → verified → (stale | invalidated | superseded
 - **superseded** — replaced by a newer entry; link both directions (`supersedes` /
   `superseded_by`).
 
-Revalidation triggers (checked opportunistically during `task-resume`, `code-investigation`, and
+Revalidation triggers (checked opportunistically during `task-resume`, `investigate-issue`, and
 `knowledge-capture` — no separate background job required):
 - referenced files no longer exist or changed materially;
 - the related component or architecture was significantly replaced;
@@ -141,7 +141,31 @@ project; backed by direct evidence or executable validation; sanitized; explicit
 `applies_when` / `does_not_apply_when`; explicit review before anything sensitive or low-confidence
 is promoted. Never automatic. A hypothesis is never promotable (§4).
 
+## 10. Report size discipline
+
+Applies to `investigation.md` and `implementation.md` (produced only on the gated path — see
+`investigation-approval-gate.md`). This is a hard cap, not a discretionary suggestion, because an
+unbounded "narrate everything" default has previously let real reports grow to tens of kilobytes of
+duplicated prose purely from unbounded narrative across revisions:
+
+1. **Evidence is pointers, not paste-ins.** Every finding cites file path, symbol/config key, and
+   line range plus a concise 1–3 sentence interpretation. Never paste full file contents, large code
+   blocks, full diffs, or raw command/log output into a durable artifact.
+2. **State each fact once; cross-reference elsewhere.** Root Cause, Impact Analysis, and Solution
+   Options reference a finding by ID (e.g. "see F-3") instead of restating its explanation.
+3. **Hard size cap.** Stop adding narrative once the Evidence section approaches ~15–20 findings, or
+   the whole report approaches ~15KB — summarize remaining detail as bullets and recommend splitting
+   into a follow-up issue rather than continuing to grow one file.
+4. **Don't re-earn evidence already on record.** On resume or reinvestigation, read the existing
+   report first and treat its unaffected, still-valid findings as given; spend new effort only on
+   what changed or what the new trigger calls into question (see `investigate-issue`).
+5. **Don't let verbose command output leak into context.** Route builds/tests/lint/`git log`/full
+   diffs to the **`task`** subagent and keep only command, result, and a short summary in the
+   record.
+
 ## Verification date
 
-Established: 2026-09-09. Invalidation: revisit if the evidence hierarchy, the layer set, the
-retrieval budget, or the status vocabulary changes.
+Established: 2026-09-09. Amended (this redesign pass): added §10 (report size discipline) after
+observing investigation/implementation reports grow unboundedly across revisions in real use.
+Invalidation: revisit if the evidence hierarchy, the layer set, the retrieval budget, the status
+vocabulary, or the size guidance in §10 changes.

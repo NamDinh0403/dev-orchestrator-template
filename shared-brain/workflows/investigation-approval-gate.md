@@ -7,12 +7,16 @@ implementation results live in **Project Memory**, never here.
 
 ## Purpose
 
-Enforce a mandatory, persistent gate between investigation and implementation. Investigation must
-**never** automatically transition into implementation. This applies on **every** execution path
-(Fast, Standard, Deep). Fast still sizes effort and may inline light investigation, but it never
-skips the gate.
+Enforce a **risk-scoped** gate between investigation and implementation. This gate is mandatory on
+the **Deep** execution path (and on any Fast/Standard task that escalates to Deep, or that a
+developer explicitly asks to be gated). It does **not** apply to default Fast or Standard tasks —
+those implement directly (`INTAKE → IMPLEMENT → VERIFY → COMPLETE`, no persisted investigation/
+approval artifact) because their bounded scope and low blast-radius make a persisted, human-reviewed
+gate pure overhead rather than governance. Whenever the gate **is** in use, investigation must
+**never** automatically transition into implementation — a developer's `APPROVED_FOR_IMPLEMENTATION`
+decision is always required first.
 
-Required flow:
+Required flow **when the gate applies** (Deep, or an explicitly/escalation-gated task):
 
 ```
 issue / card
@@ -23,18 +27,28 @@ issue / card
   → COMPLETE             (persistent implementation result)
 ```
 
+Default flow for Fast/Standard (no gate):
+
+```
+issue / card
+  → IMPLEMENT            (direct, from the normalized requirement)
+  → VERIFY
+  → COMPLETE              (concise summary; persisted record only if reusable/interrupted)
+```
+
 ## Operating modes
 
-The orchestrator must **declare the active mode** before doing mode-specific work.
+The orchestrator must **declare the active mode** before doing mode-specific work. On Fast/Standard,
+only INTAKE/IMPLEMENT/VERIFY/COMPLETE apply.
 
 | Mode | Entry | Produces | May advance to |
 | ---- | ----- | -------- | -------------- |
-| INTAKE | task received | normalized requirement set + project identity | INVESTIGATE |
-| INVESTIGATE | `/investigate-issue` | `investigation.md` (read-only evidence) | REVIEW_APPROVAL (developer-driven) |
+| INTAKE | task received | normalized requirement set + project identity | IMPLEMENT (Fast/Standard) or INVESTIGATE (Deep/gated) |
+| INVESTIGATE | `/investigate-issue`; Deep or explicit request only | `investigation.md` (read-only evidence) | REVIEW_APPROVAL (developer-driven) |
 | REVIEW_APPROVAL | `/review-investigation` | `approval.md` | IMPLEMENT (only if APPROVED_FOR_IMPLEMENTATION) |
-| IMPLEMENT | `/implement-card` with valid approval | source changes | VERIFY |
+| IMPLEMENT | direct (Fast/Standard) or `implement-card` with valid approval (Deep/gated) | source changes | VERIFY |
 | VERIFY | after implementation | executed validation evidence | COMPLETE |
-| COMPLETE | validation passed | `implementation.md` + durable capture | — |
+| COMPLETE | validation passed | `implementation.md` + durable capture (gated), or a concise summary (Fast/Standard default) | — |
 
 INVESTIGATE may **not** advance to IMPLEMENT. Only a developer, via REVIEW_APPROVAL producing
 `APPROVED_FOR_IMPLEMENTATION`, opens the gate.
@@ -55,8 +69,8 @@ and moves to `investigations/completed/` (same folder, moved as a whole — neve
 it reaches a terminal status: `implementation.md` exists with `Implementation status: COMPLETE`,
 or the gate reached `REJECTED` or `NOT_REPRODUCIBLE`. `NEEDS_REINVESTIGATION` and
 `PENDING_DEVELOPER_REVIEW` are **not** terminal — the folder stays under `active/`. This keeps
-`task-resume` and `code-investigation` from having to open every investigation folder to learn
-which ones are still open.
+`task-resume` and `investigate-issue` (which now includes the former progressive code-investigation
+procedure) from having to open every investigation folder to learn which ones are still open.
 
 Never store project-specific investigations, approvals, or implementation results in the Shared
 Brain.
@@ -114,7 +128,7 @@ An existing approval becomes stale and requires reinvestigation/reapproval when 
 - Backward-compatibility impact discovered.
 - Change to the verification/validation strategy from what was approved.
 
-## Implementation preconditions (IMPLEMENT)
+## Implementation preconditions (IMPLEMENT, gated path only — Deep or an explicitly gated Standard task)
 
 Before editing source: locate `approval.md` in the issue's investigation directory; confirm its
 decision is `APPROVED_FOR_IMPLEMENTATION`; confirm it references the current investigation version
@@ -138,5 +152,11 @@ redirect to `/investigate-issue` rather than implementing.
 
 ## Verification date
 
-Established: 2026-09-03. Invalidation: revisit if the operating-mode set, artifact layout, or gate
-statuses change.
+Established: 2026-09-03. Amended (this redesign pass): changed the gate from mandatory-on-every-path
+to risk-scoped — applies only to Deep tasks (and any Fast/Standard task that escalates or is
+explicitly requested to be gated); default Fast/Standard tasks implement directly with no persisted
+investigation/approval artifact. Rationale: operational evidence from real use of this framework
+showed the universal gate producing tens of kilobytes of generated documentation and a mandatory
+human round-trip for changes as small as a single-field visibility toggle — cost with no
+corresponding governance value at that risk level. Invalidation: revisit if the operating-mode set,
+artifact layout, gate statuses, or risk-path definitions change.

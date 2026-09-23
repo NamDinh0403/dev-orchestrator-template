@@ -2,8 +2,10 @@
 
 A reusable, client-agnostic template of a Copilot custom-agent framework built around one idea:
 **an AI coding agent should get measurably better over time instead of repeating the same
-mistakes on every task.** It does that with two durable memory layers plus a mandatory
-investigation → approval → implementation gate.
+mistakes on every task, while spending most of its effort writing code — not managing itself.**
+It does that with two durable memory layers plus a **risk-scoped** investigation → approval →
+implementation gate: routine changes flow straight through, and only genuinely risky changes stop
+for a human review.
 
 This repo is a sanitized copy of a working setup — no client data, no company-specific agents.
 Clone it, install it, and let your team grow its own knowledge base from here.
@@ -25,9 +27,13 @@ re-discovered the hard way. This framework fixes that with:
 - **Shared Brain** — a cross-project, team-wide knowledge base of verified, reusable engineering
   patterns, pitfalls, troubleshooting procedures, and decision principles, promoted from Project
   Memory only once they're evidence-backed and no longer client-specific.
-- **An investigation → approval → implementation gate** — the agent never jumps straight from
-  "I looked into it" to "I changed the code." A human reviews and approves the investigation
-  first. This is itself a durable defense against the agent acting on a wrong assumption.
+- **A risk-scoped investigation → approval → implementation gate** — a genuinely risky change
+  (security/authorization, data migration, an external contract change, architecture, an upgrade,
+  or anything a developer explicitly wants investigated first) never jumps straight from "I looked
+  into it" to "I changed the code" — a human reviews and approves the investigation first. A
+  routine Fast/Standard change (the majority of tickets) implements directly, with no persisted
+  investigation/approval paperwork and no mandatory approval round-trip, because that overhead
+  buys no governance value at that risk level.
 
 ## Layout
 
@@ -36,12 +42,12 @@ agents/
   development-orchestrator.agent.md   Thin routing agent: intake, risk classification,
                                        capability routing, completion gate, durable capture.
 prompts/
-  implement-card.prompt.md            /implement-card  — IMPLEMENT/VERIFY mode
-  investigate-issue.prompt.md         /investigate-issue — INVESTIGATE mode
-  review-investigation.prompt.md      /review-investigation — REVIEW_APPROVAL mode
+  implement-card.prompt.md            /implement-card  — IMPLEMENT/VERIFY mode (gated path)
+  investigate-issue.prompt.md         /investigate-issue — INVESTIGATE mode (Deep/gated only)
+  review-investigation.prompt.md      /review-investigation — REVIEW_APPROVAL mode (Deep/gated only)
 skills/                                Focused, single-purpose procedures the orchestrator routes to:
-  task-intake, task-resume, investigate-issue, code-investigation, review-investigation,
-  implement-card, implementation-planning, targeted-validation, diff-review,
+  task-intake, task-resume, investigate-issue (incl. progressive code investigation),
+  review-investigation, implement-card (incl. tiered planning, validation, diff review),
   decision-capture, knowledge-capture, project-bootstrap, requirement-grilling
 project-memory/                        Per-repository, isolated memory (empty scaffold — see below).
 shared-brain/                          Cross-project, team-wide knowledge base (empty scaffold —

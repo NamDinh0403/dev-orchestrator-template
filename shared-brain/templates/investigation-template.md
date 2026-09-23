@@ -1,9 +1,16 @@
 <!--
 Template — investigation.md
 Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/investigation.md
-Produced in INVESTIGATE mode by /investigate-issue. Read-only evidence: never modify source, config,
-or tests as part of a proposed fix; never implement. Replace every <placeholder>. Memory retrieval
-and evidence rules: ~/.copilot/shared-brain/workflows/memory-evidence-policy.md.
+Produced in INVESTIGATE mode by the `investigate-issue` skill — Deep-path tasks, or a Fast/Standard
+task that escalates or is explicitly asked to be investigated. Read-only evidence: never modify
+source, config, or tests as part of a proposed fix; never implement. Replace every <placeholder>.
+Memory retrieval and evidence rules: ~/.copilot/shared-brain/workflows/memory-evidence-policy.md.
+
+Report size discipline (memory-evidence-policy.md §10, hard cap): evidence is pointers (file/
+symbol/line + a 1-3 sentence interpretation), never pasted file contents, diffs, or raw command
+output. State each fact once and cross-reference elsewhere (e.g. "see F-3") instead of restating
+it. Stop adding narrative once Evidence approaches ~20 findings or the report approaches ~15KB —
+summarize remaining detail and recommend splitting into a follow-up issue instead.
 -->
 
 # Investigation: <issue ID or title>

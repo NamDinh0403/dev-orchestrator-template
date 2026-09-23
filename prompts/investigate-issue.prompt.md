@@ -2,12 +2,15 @@
 name: investigate-issue
 description: Investigate a card or issue read-only and produce a persistent investigation report that stops at a mandatory developer-review gate. Never implements.
 argument-hint: <card-url-or-id | pasted requirements | path to existing investigation.md>
-agent: development-orchestrator
+agent: Development Orchestrator
 ---
 
 # /investigate-issue
 
-Run the **INVESTIGATE** mode of the investigation approval gate.
+Run the **INVESTIGATE** mode of the investigation approval gate. This is now used only for **Deep**
+tasks, or when a Fast/Standard task escalates or a developer explicitly wants the full gate — Fast
+and default-Standard tasks implement directly without this command (see
+`~/.copilot/agents/development-orchestrator.agent.md`).
 
 Declare INVESTIGATE mode, then follow the `investigate-issue` skill
 (`~/.copilot/skills/investigate-issue/SKILL.md`) and the policy

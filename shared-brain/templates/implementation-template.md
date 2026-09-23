@@ -1,8 +1,14 @@
 <!--
 Template — implementation.md
 Location: ~/.copilot/project-memory/projects/<PROJECT-KEY>/investigations/{active,completed}/<issue-id-or-slug>/implementation.md
-Produced in IMPLEMENT → VERIFY → COMPLETE by /implement-card, only after a valid
-APPROVED_FOR_IMPLEMENTATION approval. Replace every <placeholder>.
+Produced in IMPLEMENT → VERIFY → COMPLETE by the `implement-card` skill's gated mode (Deep, or an
+explicitly gated Standard task), only after a valid APPROVED_FOR_IMPLEMENTATION approval. Fast and
+default-Standard tasks do not produce this file (see `implement-card`'s direct mode). Replace every
+<placeholder>.
+
+Report size discipline (memory-evidence-policy.md §10, hard cap): stop growing past roughly 15KB —
+summarize remaining detail as bullets referencing files/finding IDs and the diff itself rather than
+narrating every change in prose.
 -->
 
 # Implementation Result: <issue ID or title>
